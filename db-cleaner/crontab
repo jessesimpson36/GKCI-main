@@ -1,0 +1,2 @@
+MAILTO=""
+0 3 * * * root . /db-connection-env && psql -f /slim.psql >> /tmp/psql-output 2>&1

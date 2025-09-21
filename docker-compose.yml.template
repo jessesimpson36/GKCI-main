@@ -89,6 +89,12 @@ services:
       - fileserver:/var/www/static
     restart: always
 
+  db-cleaner:
+    build:
+      context: ./db-cleaner
+    networks:
+      - gkernelci-net
+
 volumes:
   db:
   certs:

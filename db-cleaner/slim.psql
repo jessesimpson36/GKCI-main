@@ -1,0 +1,21 @@
+update logchunks
+set
+  compressed = 0,
+  content = '\x00'::bytea,
+  first_line = 0,
+  last_line = 0
+from logs
+join steps on logs.stepid = steps.id
+join builds on steps.buildid = builds.id
+where
+  logchunks.logid = logs.id AND to_timestamp(builds.started_at) < now() - interval '30 days';
+
+update logs
+set
+  num_lines = 0
+from steps
+join builds on steps.buildid = builds.id
+where
+  logs.stepid = steps.id AND to_timestamp(builds.started_at) < now() - interval '30 days';
+
+VACUUM;
