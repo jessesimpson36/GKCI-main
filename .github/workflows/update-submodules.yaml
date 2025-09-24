@@ -1,0 +1,35 @@
+name: "Auto-update submodules"
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/update-submodules.yaml"
+  workflow_dispatch: 
+  schedule:
+    - cron: "0 4 * * 0" # 4 AM sunday UTC
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-submodules:
+    name: "Update Submodules"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v5
+        with:
+          submodules: recursive
+          ref: master
+
+      - name: update submodules
+        run: |
+          git submodule sync
+          git submodule update --remote --force
+
+      - uses: EndBug/add-and-commit@a94899bca583c204427a224a7af87c02f9b325d5 # v9.1.4
+        with:
+          author_name: "gkci[bot]"
+          author_email: "gkci[bot]@users.noreply.github.com"
+          message: "chore: update submodules"
