@@ -6,7 +6,7 @@ on:
       - ".github/workflows/update-submodules.yaml"
   workflow_dispatch: 
   schedule:
-    - cron: "0 4 * * 0" # 4 AM sunday UTC
+    - cron: "0 4 * * *" # 4 AM daily
 
 permissions:
   contents: write
