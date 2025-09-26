@@ -90,6 +90,7 @@ services:
     restart: always
 
   db-cleaner:
+    env_file: db.env
     build:
       context: ./db-cleaner
     networks:

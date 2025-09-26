@@ -1,5 +1,0 @@
-export PGHOST=db
-export PGDATABASE=buildbot
-export PGUSER=buildbot
-export PGPASSWORD=change_me
-export PGPORT=5432
